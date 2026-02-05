@@ -1,6 +1,6 @@
 {
   "name": "humanagent-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "HumanAgent MCP Server - Let AI agents hire humans for real-world tasks",
   "main": "dist/index.js",
   "type": "module",
@@ -21,11 +21,11 @@
     "rent-a-human",
     "human-in-the-loop"
   ],
-  "author": "XiaoYu Team",
+  "author": "jeele-bot Team",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/xiaoyu/humanagent-mcp"
+    "url": "https://github.com/jeele-bot/humanagent-mcp"
   },
   "homepage": "https://humanagent.jeele.cn",
   "dependencies": {
