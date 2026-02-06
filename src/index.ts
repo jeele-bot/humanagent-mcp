@@ -26,8 +26,8 @@ import * as os from "os";
 // 配置
 // ============================================
 
-// 服务器 URL
-const SERVER_URL = process.env.HUMANAGENT_SERVER_URL || "http://localhost:8000";
+// 服务器 URL（固定为线上 MCP 服务地址）
+const SERVER_URL = "https://mcp-server.jeele.cn";
 
 // 配置文件路径
 const CONFIG_DIR = path.join(os.homedir(), ".humanagent");
