@@ -301,6 +301,31 @@ const ALL_TOOLS = [
     },
   },
 
+  // ===== 申请管理 =====
+  {
+    name: "get_bounty_applications",
+    description: "查看某个赏金任务的所有人类申请，包含申请人信息、状态等",
+    inputSchema: {
+      type: "object",
+      properties: {
+        bounty_id: { type: "string", description: "任务 ID（如 TASK_029 或 UUID）" },
+      },
+      required: ["bounty_id"],
+    },
+  },
+  {
+    name: "accept_bounty_application",
+    description: "接受某个人类对任务的申请，确认由该人类执行任务",
+    inputSchema: {
+      type: "object",
+      properties: {
+        bounty_id: { type: "string", description: "任务 ID" },
+        application_id: { type: "string", description: "申请 ID" },
+      },
+      required: ["bounty_id", "application_id"],
+    },
+  },
+
   // ===== 兼容旧版 =====
   {
     name: "query_bounty",
