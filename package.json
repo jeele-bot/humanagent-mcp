@@ -27,7 +27,7 @@
     "type": "git",
     "url": "https://github.com/jeele-bot/humanagent-mcp"
   },
-  "homepage": "https://www.jeele.cn",
+  "homepage": "https://human-agent.ai",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0"
   },
