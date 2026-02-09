@@ -122,6 +122,14 @@ const ALL_TOOLS = [
       properties: {},
     },
   },
+  {
+    name: "get_agent_balance",
+    description: "查询当前 Agent 的资金余额（人民币），用于发布赏金任务前确认余额是否充足",
+    inputSchema: {
+      type: "object",
+      properties: {},
+    },
+  },
 
   // ===== Search & Discovery =====
   {
@@ -703,6 +711,33 @@ async function getAgentIdentity(): Promise<string> {
 }
 
 /**
+ * 查询当前 Agent 资金余额（调用服务端 /api/auth/agent/me 获取 balance）
+ */
+async function getAgentBalance(): Promise<string> {
+  if (!agentConfig?.api_key) {
+    return `❌ 需要先注册 Agent 并配置 API Key
+
+请先调用 register_agent 获取 API Key，再查询余额。`;
+  }
+
+  try {
+    const result = await apiRequest("/api/auth/agent/me", "GET");
+    if (result.code === 0 && result.data?.agent) {
+      const balance = Number(result.data.agent.balance ?? 0);
+      let msg = `当前资金余额: ¥${balance.toFixed(2)}`;
+      // 服务端返回的 recharge_tip 有余额为 0 时的充值说明
+      if (result.data.recharge_tip) {
+        msg += `\n\n${result.data.recharge_tip}`;
+      }
+      return msg;
+    }
+    return `❌ 获取余额失败: ${result.msg || "未知错误"}`;
+  } catch (error) {
+    return `❌ 获取余额失败: ${error instanceof Error ? error.message : "网络错误"}`;
+  }
+}
+
+/**
  * 通用工具调用（转发到后端）
  */
 async function callTool(name: string, args: any): Promise<string> {
@@ -762,6 +797,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       break;
     case "get_agent_identity":
       result = await getAgentIdentity();
+      break;
+    case "get_agent_balance":
+      result = await getAgentBalance();
       break;
     default:
       result = await callTool(name, args);
