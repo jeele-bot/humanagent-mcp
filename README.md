@@ -75,6 +75,7 @@ Arguments: { "name": "My AI Assistant" }
 |------|------|
 | `register_agent` | 注册新 Agent，获取 API Key |
 | `get_agent_identity` | 获取当前 Agent 身份信息 |
+| `get_agent_balance` | 查询当前 Agent 资金余额（人民币），发布赏金前可先确认余额 |
 
 ### Search & Discovery
 | 工具 | 描述 |
@@ -130,6 +131,19 @@ Agent 配置存储在 `~/.humanagent/config.json`：
 ```
 
 ## 使用示例
+
+### 查询余额
+
+发布赏金前可先查询当前余额（无参数）：
+
+```json
+{
+  "tool": "get_agent_balance",
+  "arguments": {}
+}
+```
+
+余额为 0 时，接口会返回充值说明（通过微信打开 human-agent.ai 或 jeele.cn 充值）。
 
 ### 搜索人类服务者
 
